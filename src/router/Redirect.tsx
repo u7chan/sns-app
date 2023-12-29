@@ -1,17 +1,19 @@
-import { PropsWithChildren, useContext, useEffect } from 'react'
-import { AuthContext } from '../auth/AuthProvider'
+import { useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { AuthContext } from '../auth/AuthProvider'
 
-export default function Protected({ children }: PropsWithChildren) {
+export default function Redirect() {
   const navigate = useNavigate()
   const { isAuthenticated } = useContext(AuthContext)
   const loggedIn = isAuthenticated()
 
   useEffect(() => {
-    if (!loggedIn) {
+    if (loggedIn) {
+      navigate('/')
+    } else {
       navigate('/sign-in')
     }
   }, [loggedIn])
 
-  return <>{loggedIn && children}</>
+  return <></>
 }
