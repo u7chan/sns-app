@@ -17,7 +17,11 @@ import { SignInForm } from '../types'
 export default function SignIn() {
   const navigate = useNavigate()
   const signIn = useSignIn()
-  const { handleSubmit, register } = useForm<SignInForm>({
+  const {
+    handleSubmit,
+    register,
+    formState: { isValid },
+  } = useForm<SignInForm>({
     defaultValues: {
       email: '',
       password: '',
@@ -37,13 +41,19 @@ export default function SignIn() {
             <form onSubmit={handleSubmit(submitForm)}>
               <VStack>
                 <FormControl label='Email'>
-                  <Input type='email' {...register('email')} />
+                  <Input
+                    type='email'
+                    {...register('email', { required: true })}
+                  />
                 </FormControl>
                 <FormControl label='Password'>
-                  <Input type='password' {...register('password')} />
+                  <Input
+                    type='password'
+                    {...register('password', { required: true })}
+                  />
                 </FormControl>
                 <Spacer />
-                <Button type='submit' colorScheme='primary'>
+                <Button type='submit' colorScheme='primary' disabled={!isValid}>
                   Login
                 </Button>
               </VStack>
