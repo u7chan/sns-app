@@ -43,7 +43,9 @@ export default function SignIn() {
                   <Input type='password' {...register('password')} />
                 </FormControl>
                 <Spacer />
-                <Button type='submit'>Login</Button>
+                <Button type='submit' colorScheme='primary'>
+                  Login
+                </Button>
               </VStack>
             </form>
           </Card>
